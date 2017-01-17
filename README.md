@@ -1,4 +1,29 @@
-[TOC]
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [需求概述](#%E9%9C%80%E6%B1%82%E6%A6%82%E8%BF%B0)
+  - [关闭顶部通知条](#%E5%85%B3%E9%97%AD%E9%A1%B6%E9%83%A8%E9%80%9A%E7%9F%A5%E6%9D%A1)
+  - [关注“网易教育产品部”/登录](#%E5%85%B3%E6%B3%A8%E7%BD%91%E6%98%93%E6%95%99%E8%82%B2%E4%BA%A7%E5%93%81%E9%83%A8%E7%99%BB%E5%BD%95)
+  - [顶部右侧导航及内容区各产品的“了解更多”](#%E9%A1%B6%E9%83%A8%E5%8F%B3%E4%BE%A7%E5%AF%BC%E8%88%AA%E5%8F%8A%E5%86%85%E5%AE%B9%E5%8C%BA%E5%90%84%E4%BA%A7%E5%93%81%E7%9A%84%E4%BA%86%E8%A7%A3%E6%9B%B4%E5%A4%9A)
+  - [轮播图](#%E8%BD%AE%E6%92%AD%E5%9B%BE)
+  - [左侧内容区tab切换](#%E5%B7%A6%E4%BE%A7%E5%86%85%E5%AE%B9%E5%8C%BAtab%E5%88%87%E6%8D%A2)
+  - [查看课程详情](#%E6%9F%A5%E7%9C%8B%E8%AF%BE%E7%A8%8B%E8%AF%A6%E6%83%85)
+  - [右侧“机构介绍”中的视频介绍](#%E5%8F%B3%E4%BE%A7%E6%9C%BA%E6%9E%84%E4%BB%8B%E7%BB%8D%E4%B8%AD%E7%9A%84%E8%A7%86%E9%A2%91%E4%BB%8B%E7%BB%8D)
+  - [右侧“热门推荐”](#%E5%8F%B3%E4%BE%A7%E7%83%AD%E9%97%A8%E6%8E%A8%E8%8D%90)
+  - [页面布局动态适应](#%E9%A1%B5%E9%9D%A2%E5%B8%83%E5%B1%80%E5%8A%A8%E6%80%81%E9%80%82%E5%BA%94)
+- [实现要求](#%E5%AE%9E%E7%8E%B0%E8%A6%81%E6%B1%82)
+  - [效果要求](#%E6%95%88%E6%9E%9C%E8%A6%81%E6%B1%82)
+  - [功能要求](#%E5%8A%9F%E8%83%BD%E8%A6%81%E6%B1%82)
+  - [兼容性要求](#%E5%85%BC%E5%AE%B9%E6%80%A7%E8%A6%81%E6%B1%82)
+  - [HTML要求](#html%E8%A6%81%E6%B1%82)
+  - [CSS要求](#css%E8%A6%81%E6%B1%82)
+  - [JS要求](#js%E8%A6%81%E6%B1%82)
+  - [其他要求](#%E5%85%B6%E4%BB%96%E8%A6%81%E6%B1%82)
+- [说明](#%E8%AF%B4%E6%98%8E)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 需求概述
 ### 关闭顶部通知条
 点击顶部通知条中的“X 不再提醒”后，刷新页面不再出现此通知条（使用本地cookie实现）。
