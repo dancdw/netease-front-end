@@ -1,7 +1,7 @@
 !function(_){
 
   function Validator() {
-    if(!(this instanceof Validator)) return;
+    if(!(this instanceof Validator)) return new Validator;
   }
 
   Validator.prototype = {

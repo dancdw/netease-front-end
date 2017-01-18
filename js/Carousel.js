@@ -1,4 +1,4 @@
-!function(util, Animation, emitter) {
+!function(util, animation, emitter) {
   var extend = util.extend,
       html2node = util.html2node,
       getElementsByClassName = util.getElementsByClassName,
@@ -24,7 +24,7 @@
     extend(this, opt);
 
     this.currIndex = 1;
-    this.pageIndex = 0;
+    this.pageIndex = -1;
     this.offsetAll = this.pageIndex;
     this.pageNum = this.data.length;
 
@@ -37,7 +37,7 @@
     this._bind();
   }
 
-  extend(Carousel.prototype, Animation.prototype);
+  extend(Carousel.prototype, animation);
 
   extend(Carousel.prototype, emitter);
 
@@ -180,4 +180,4 @@
   } else {
     window.Carousel = Carousel;
   }
-}(util, Animation, emitter);
+}(util, animation, emitter);

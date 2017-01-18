@@ -1,4 +1,4 @@
-(function(util, cookie, LoginModal, ajax, md5, Carousel, Animation, TagCenter, CourseFactory, VideoModal) {
+(function(util, cookie, LoginModal, ajax, md5, Carousel, animation, TagCenter, CourseFactory, VideoModal) {
   var $ = util.$,
       addEvent = util.addEvent,
       addClass = util.addClass,
@@ -157,21 +157,21 @@
         lastIndex = ev.lastIndex,
         beltItems = ev.beltItems;
 
+    if(lastIndex === index) return;
+
     // 实现渐变
     [].forEach.call(beltItems, function(item, key) {
+      beltItems[key].style.opacity = 0.3;
       if(key === index){
         beltItems[key].style.zIndex = 2;
-      }else if(key === lastIndex) {
+        animation.animate(beltItems[key], 'opacity', 0.3, 1, 20, 200);
+      } else if(key === lastIndex) {
         beltItems[key].style.zIndex = 1;
       } else {
         beltItems[key].style.zIndex = 0;
       }
     });
-
-    var animateNo = new Animation();
-    animateNo.animate(beltItems[index], 'opacity', 0, 1, 20, 100, function() {
-      animateNo = null;
-    });
+    
 
     // 按钮选中
     navs.forEach(function(item, key) {
@@ -249,4 +249,4 @@
     imgUrl: 'imgs/videoBg.jpg',
     url: 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4',
   });
-})(util, cookie, LoginModal, ajax, md5, Carousel, Animation, TagCenter, CourseFactory, VideoModal);
+})(util, cookie, LoginModal, ajax, md5, Carousel, animation, TagCenter, CourseFactory, VideoModal);

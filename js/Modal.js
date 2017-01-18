@@ -16,7 +16,7 @@
                   </div>';
 
   function Modal() {
-    if(!(this instanceof Modal)) return;
+    if(!(this instanceof Modal)) return new Modal;
   }
 
   Modal.prototype = {

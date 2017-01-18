@@ -61,7 +61,7 @@
 
     // 生成课程内容
     _layout: function() {
-      var html = '<div class="content">';
+      var html = '<div class="content f-cb">';
       this['responseData'][this.pageName]['list'].forEach(function(item) {
       	var obj = extend({}, item); // 对象拷贝
       	obj.categoryName = obj.categoryName ? obj.categoryName : '暂无';
@@ -113,6 +113,12 @@
       });
 
       // addEvent(window, 'resize', this._reRequest.bind(self));
+      addEvent(window, 'resize', function() {
+        clearTimeout(this['timerId']);
+        this['timerId'] = setTimeout(function() {
+          self._reRequest();
+        }, 500);
+      });
     },
 
     // 重新请求数据
