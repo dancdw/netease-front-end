@@ -142,6 +142,6 @@
   VideoModal({
     container: $('j-video'),
     imgUrl: 'imgs/videoBg.jpg',
-    url: 'http://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4',
+    url: 'https://mov.bn.netease.com/open-movie/nos/mp4/2014/12/30/SADQ86F5S_shd.mp4',
   });
 })(util, cookie, ajax, md5, Carousel, animation, TagCenter, CourseFactory, VideoModal, Follow);
