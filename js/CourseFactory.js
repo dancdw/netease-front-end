@@ -155,7 +155,7 @@
 
       if(!this['responseData'].hasOwnProperty(this.pageName)) {
       	this.request({
-    		  url: 'http://study.163.com/webDev/couresByCategory.htm',
+    		  url: 'https://study.163.com/webDev/couresByCategory.htm',
     		  method: 'get',
     		  data: { pageNo:this.pageNo, psize:this.psize, type:this.type },
     		  success: function(xhr){

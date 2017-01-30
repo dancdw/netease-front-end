@@ -4,7 +4,7 @@
       addClass = util.addClass,
       delClass = util.delClass,
       getElementsByClassName = util.getElementsByClassName,
-      url = 'http://study.163.com/webDev',
+      url = 'https://study.163.com/webDev',
       follow = $('j-follow'),
       hasfollow = $('j-hasfollow'),
       md5 = md5.md5,
