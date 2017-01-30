@@ -121,6 +121,8 @@
       // 居中
       modal_wrap.style.left = doc.documentElement.clientWidth / 2 - modal_wrap.clientWidth / 2 + 'px';
       modal_wrap.style.top = doc.documentElement.clientHeight / 2 - modal_wrap.clientHeight / 2 + 'px';
+
+      return this;
     },
 
     // 设置标题内容

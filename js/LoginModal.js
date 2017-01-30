@@ -12,6 +12,8 @@
       inputTpl = '<div class="modal_group"><label for="j-{$name}" class="modal_label">{$label}</label><input type="{$type}" name="{$name}" id="j-{$name}" class="modal_input"></div>';
 
   function LoginModal(opt) {
+    if(!(this instanceof LoginModal)) return new LoginModal(opt);
+    
     extend(this, opt);
 
     this.form = this.form ? this.form : {name:'loginForm'};

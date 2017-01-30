@@ -21,6 +21,7 @@
 
 
   function Carousel(opt) {
+    if(!(this instanceof Carousel)) return new Carousel(opt);
     extend(this, opt);
 
     this.currIndex = 1;
@@ -159,6 +160,7 @@
       this.timer = setInterval(function() {
         self.next();
       }, this.timeout);
+
       return this;
     },
 

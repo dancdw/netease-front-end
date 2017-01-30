@@ -9,7 +9,7 @@
   	  hasClass = util.hasClass,
   	  getDataset = util.getDataset,
       getScrollbarWidth = util.getScrollbarWidth,
-      isTimeout,
+      isTimeout = -1,
   	  tpl = '<div class="item">\
               <div class="profiles">\
                 <img src="{$middlePhotoUrl}" />\
@@ -112,7 +112,7 @@
       	addEvent(item, 'click', self._sendAjax.bind(self, dataset.pageno));
       });
 
-      // addEvent(window, 'resize', this._reRequest.bind(self));
+      // 页面缩放事件
       addEvent(window, 'resize', function() {
         clearTimeout(this['timerId']);
         this['timerId'] = setTimeout(function() {
@@ -137,6 +137,7 @@
       isTimeout = setTimeout(function() {
         addClass(details, 'z-active');
       }, 500);
+      console.log(isTimeout)
     },
 
     // 隐藏详情

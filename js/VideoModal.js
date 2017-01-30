@@ -18,6 +18,7 @@
   // }
 
   function VideoModal(opt) {
+    if(!(this instanceof VideoModal)) return new VideoModal(opt);
     extend(this, opt);
 
     this.container = this.container ? this.container : document.body;

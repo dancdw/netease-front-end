@@ -6,7 +6,7 @@
       addEvent = util.addEvent;
       
   function TagCenter(opt) {
-  	if(!(this instanceof TagCenter)) return;
+  	if(!(this instanceof TagCenter)) return new TagCenter(opt);
 
   	extend(this, opt);
 
