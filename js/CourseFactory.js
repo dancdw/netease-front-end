@@ -137,7 +137,6 @@
       isTimeout = setTimeout(function() {
         addClass(details, 'z-active');
       }, 500);
-      console.log(isTimeout)
     },
 
     // 隐藏详情

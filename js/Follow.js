@@ -3,7 +3,8 @@
       addEvent = util.addEvent,
       extend = util.extend,
       addClass = util.addClass,
-      delClass = util.delClass;
+      delClass = util.delClass,
+      url = 'http://study.163.com/webDev';
 
   // 关注成功状态
   var followSucState = function() {
