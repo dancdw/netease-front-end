@@ -53,6 +53,7 @@ input { vertical-align: middle; }
 .m-modal .modal_input{ width:269px; padding:13px 12px; border:1px solid #dfdfdf; background:#fafafa; box-shadow:1px 1px 1px 1px #f1f1f1 inset; }
 .m-modal .modal_submit{ width:295px; height:46px; margin:0 0 40px 40px; line-height:46px; border:0; background:#20a942; text-align:center; box-shadow:2px 2px 1px 1px #d5e3da; font-size:16px;  font-weight:bold; color:#fff;}
 .m-modal .modal_video{ margin:0 30px 40px 30px; }
+.m-modal .modal_error{ color:#d14; position:absolute; bottom:15px; left:40px;}
 
 /* 顶部通知条 */
 .m-topad{ padding:12px 0; background-color:#f3f3f3; font-size:12px; }

@@ -1,16 +1,16 @@
-!function(util, ajax, page) {
-  var extend = util.extend,
-  	  html2node = util.html2node,
-  	  easyTpl = util.easyTpl,
-  	  getElementsByClassName = util.getElementsByClassName,
-  	  addEvent = util.addEvent,
-  	  addClass = util.addClass,
-  	  delClass = util.delClass,
-  	  hasClass = util.hasClass,
-  	  getDataset = util.getDataset,
-      getScrollbarWidth = util.getScrollbarWidth,
-      isTimeout = -1,
-  	  tpl = '<div class="item">\
+! function(util, ajax, page) {
+    var extend = util.extend,
+        html2node = util.html2node,
+        easyTpl = util.easyTpl,
+        getElementsByClassName = util.getElementsByClassName,
+        addEvent = util.addEvent,
+        addClass = util.addClass,
+        delClass = util.delClass,
+        hasClass = util.hasClass,
+        getDataset = util.getDataset,
+        getScrollbarWidth = util.getScrollbarWidth,
+        isTimeout = -1,
+        tpl = '<div class="item">\
               <div class="profiles">\
                 <img src="{$middlePhotoUrl}" />\
                 <p class="f-ellipsis">{$name}</p>\
@@ -30,164 +30,164 @@
               </div>\
             </div>';
 
-  var getPsize = function() {
-    return document.documentElement.clientWidth + getScrollbarWidth() >= 1205 ? 20 : 15;
-  }
-  
-  function CourseFactory(opt) {
-  	var container = opt.container;
-  	// 防止重复调用
-  	if(hasClass(container, 'course-container')) return;
+    var getPsize = function() {
+        return document.documentElement.clientWidth + getScrollbarWidth() >= 1205 ? 20 : 15;
+    }
 
-  	addClass(container, 'course-container');
-  	return new Course(opt);
-  }
+    function CourseFactory(opt) {
+        var container = opt.container;
+        // 防止重复调用
+        if (hasClass(container, 'course-container')) return;
 
-  function Course(opt) {
-  	extend(this, opt);
+        addClass(container, 'course-container');
+        return new Course(opt);
+    }
 
-  	this.type = this.type ? this.type : 10;
-    this.pageNo = this.pageNo ? this.pageNo : 1;
-    this.responseData = {}; // 存放缓存数据
+    function Course(opt) {
+        extend(this, opt);
 
-  	this._sendAjax();
-  }
-  
-  extend(Course.prototype, ajax);
+        this.type = this.type ? this.type : 10;
+        this.pageNo = this.pageNo ? this.pageNo : 1;
+        this.responseData = {}; // 存放缓存数据
 
-  extend(Course.prototype, page);
+        this._sendAjax();
+    }
 
-  extend(Course.prototype, {
+    extend(Course.prototype, ajax);
 
-    // 生成课程内容
-    _layout: function() {
-      var html = '<div class="content f-cb">';
-      this['responseData'][this.pageName]['list'].forEach(function(item) {
-      	var obj = extend({}, item); // 对象拷贝
-      	obj.categoryName = obj.categoryName ? obj.categoryName : '暂无';
-        obj.price = obj.price ? '￥' + obj.price : '免费';
-      	html += easyTpl(tpl, obj);
-      });
-      html += '</div>';
-      return html2node(html);
-    },
+    extend(Course.prototype, page);
 
-    // 回调处理
-    _callback: function() {
-      // 清空原有内容
-      this.container.innerHTML = '';
+    extend(Course.prototype, {
 
-      // 生成课程内容节点
-      this.courses = this._layout();
+        // 生成课程内容
+        _layout: function() {
+            var html = '<div class="content f-cb">';
+            this['responseData'][this.pageName]['list'].forEach(function(item) {
+                var obj = extend({}, item); // 对象拷贝
+                obj.categoryName = obj.categoryName ? obj.categoryName : '暂无';
+                obj.price = obj.price ? '￥' + obj.price : '免费';
+                html += easyTpl(tpl, obj);
+            });
+            html += '</div>';
+            return html2node(html);
+        },
 
-      // 生成分页器节点
-      this.pageContainer = this.renderPage(this['responseData'][this.pageName]['totalPage'], this.pageNo);
+        // 回调处理
+        _callback: function() {
+            // 清空原有内容
+            this.container.innerHTML = '';
 
-      this.items = [].slice.call(getElementsByClassName(this.courses, 'item'));
-      this.pageItems = [].slice.call(getElementsByClassName(this.pageContainer, 'item'));
+            // 生成课程内容节点
+            this.courses = this._layout();
 
-      this._bind();
+            // 生成分页器节点
+            this.pageContainer = this.renderPage(this['responseData'][this.pageName]['totalPage'], this.pageNo);
 
-      this.container.appendChild(this.courses);
-      this.container.appendChild(this.pageContainer);
-    },
+            this.items = [].slice.call(getElementsByClassName(this.courses, 'item'));
+            this.pageItems = [].slice.call(getElementsByClassName(this.pageContainer, 'item'));
 
-    // 绑定事件
-    _bind: function() {
-      var self = this;
+            this._bind();
 
-      // 是否显示详情
-      this.items.forEach(function(item) {
-      	var details = getElementsByClassName(item, 'details')[0],
-      		  profiles = getElementsByClassName(item, 'profiles')[0];
+            this.container.appendChild(this.courses);
+            this.container.appendChild(this.pageContainer);
+        },
 
-      	addEvent(item, 'mouseenter', self._showDetails.bind(self, profiles, details));
+        // 绑定事件
+        _bind: function() {
+            var self = this;
 
-      	addEvent(item, 'mouseleave', self._hideDetails.bind(self, details));
-      });
+            // 是否显示详情
+            this.items.forEach(function(item) {
+                var details = getElementsByClassName(item, 'details')[0],
+                    profiles = getElementsByClassName(item, 'profiles')[0];
 
-      // 分页更新数据
-      this.pageItems.forEach(function(item) {
-      	var dataset = getDataset(item);
-      	addEvent(item, 'click', self._sendAjax.bind(self, dataset.pageno));
-      });
+                addEvent(item, 'mouseenter', self._showDetails.bind(self, profiles, details));
 
-      // 页面缩放事件
-      addEvent(window, 'resize', function() {
-        clearTimeout(this['timerId']);
-        this['timerId'] = setTimeout(function() {
-          self._reRequest();
-        }, 500);
-      });
-    },
+                addEvent(item, 'mouseleave', self._hideDetails.bind(self, details));
+            });
 
-    // 重新请求数据
-    _reRequest: function() {
-      this._sendAjax(this.pageNo);
-    },
+            // 分页更新数据
+            this.pageItems.forEach(function(item) {
+                var dataset = getDataset(item);
+                addEvent(item, 'click', self._sendAjax.bind(self, dataset.pageno));
+            });
 
-    // 显示详情
-    _showDetails: function(profiles, details) {
-      var offsetLeft = parseFloat(profiles.offsetLeft),
-      	  offsetTop = parseFloat(profiles.offsetTop);
-      
-      details.style.left = offsetLeft - 9 + 'px';
-      details.style.top = offsetTop - 9 + 'px';
+            // 页面缩放事件
+            addEvent(window, 'resize', function() {
+                clearTimeout(this['timerId']);
+                this['timerId'] = setTimeout(function() {
+                    self._reRequest();
+                }, 500);
+            });
+        },
 
-      isTimeout = setTimeout(function() {
-        addClass(details, 'z-active');
-      }, 500);
-    },
+        // 重新请求数据
+        _reRequest: function() {
+            this._sendAjax(this.pageNo);
+        },
 
-    // 隐藏详情
-    _hideDetails: function(details) {
-      delClass(details, 'z-active');
-      clearTimeout(isTimeout);
-    },
+        // 显示详情
+        _showDetails: function(profiles, details) {
+            var offsetLeft = parseFloat(profiles.offsetLeft),
+                offsetTop = parseFloat(profiles.offsetTop);
 
-    // 发送ajax请求
-    _sendAjax: function(pageNo) {
-      var self = this;
-      
-      this.pageNo = pageNo ? pageNo : 1;
-      this.psize = getPsize();
-      this.pageName = this._getPageName();
+            details.style.left = offsetLeft - 9 + 'px';
+            details.style.top = offsetTop - 9 + 'px';
 
-      if(!this['responseData'].hasOwnProperty(this.pageName)) {
-      	this.request({
-    		  url: 'https://study.163.com/webDev/couresByCategory.htm',
-    		  method: 'get',
-    		  data: { pageNo:this.pageNo, psize:this.psize, type:this.type },
-    		  success: function(xhr){
-    	      self['responseData'][self.pageName] = JSON.parse(xhr.responseText);
+            isTimeout = setTimeout(function() {
+                addClass(details, 'z-active');
+            }, 500);
+        },
 
-    		    self._callback();
-    		  },
-    		  error: function(xhr) {
-    		    console.error('Request was unsuccessful: ' + xhr.status);
-    		  }
-    		});
-      } else {
-      	this._callback();
-      }
-    },
+        // 隐藏详情
+        _hideDetails: function(details) {
+            delClass(details, 'z-active');
+            clearTimeout(isTimeout);
+        },
 
-    // 获取分页名称
-    _getPageName: function() {
-      return 'page' + '_' + getPsize() + '_' + this.pageNo;
-    },
+        // 发送ajax请求
+        _sendAjax: function(pageNo) {
+            var self = this;
 
-  });
+            this.pageNo = pageNo ? pageNo : 1;
+            this.psize = getPsize();
+            this.pageName = this._getPageName();
 
-  // 暴露 API
-  if (typeof exports === 'object') {
-    module.exports = CourseFactory;
-  } else if (typeof define === 'function' && define.amd) {
-    // 支持amd
-    define(function() {
-      return CourseFactory;
+            if (!this['responseData'].hasOwnProperty(this.pageName)) {
+                this.request({
+                    url: 'https://study.163.com/webDev/couresByCategory.htm',
+                    method: 'get',
+                    data: { pageNo: this.pageNo, psize: this.psize, type: this.type },
+                    success: function(xhr) {
+                        self['responseData'][self.pageName] = JSON.parse(xhr.responseText);
+
+                        self._callback();
+                    },
+                    error: function(xhr) {
+                        console.error('Request was unsuccessful: ' + xhr.status);
+                    }
+                });
+            } else {
+                this._callback();
+            }
+        },
+
+        // 获取分页名称
+        _getPageName: function() {
+            return 'page' + '_' + getPsize() + '_' + this.pageNo;
+        },
+
     });
-  } else {
-    window.CourseFactory = CourseFactory;
-  }
+
+    // 暴露 API
+    if (typeof exports === 'object') {
+        module.exports = CourseFactory;
+    } else if (typeof define === 'function' && define.amd) {
+        // 支持amd
+        define(function() {
+            return CourseFactory;
+        });
+    } else {
+        window.CourseFactory = CourseFactory;
+    }
 }(util, ajax, page);
