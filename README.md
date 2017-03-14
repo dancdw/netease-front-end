@@ -3,7 +3,7 @@
 1. 安装 [NodeJS](https://nodejs.org/en/ "NodeJS官网")
 2. `npm install -g gulp`
 3. `npm install`
-4. `gulp or gulp server`
+4. `gulp or gulp build`
 
 ## 目录结构
 
